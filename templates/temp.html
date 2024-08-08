@@ -1,0 +1,464 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hoşgeldiniz!</h1>
+<h2>Phorcys Kütüphanesi Genel Bakış</h2>
+
+<p>Phorcys, metin işleme ve analiz için geniş bir işlevsellik yelpazesi sunan kapsamlı bir Türkçe Doğal Dil İşleme (NLP) kütüphanesidir. Medya işlemden metin normalizasyonuna ve model yönetimine kadar çeşitli NLP alanlarını ele alan araçlar içerir. İşte Phorcys kütüphanesinde mevcut olan ana modüllerin genel bir bakışı:</p>
+
+<h3>Kurulum</h3>
+<div class="boxy">
+    <h4>Gereksinimler</h4>
+    <p>Phorcys'i kurmadan önce aşağıdaki gereksinimlerin karşılandığından emin olun:</p>
+    <p>Python 3.6 veya daha yüksek bir sürüm</p>
+    <p><a href="https://www.ffmpeg.org/">ffmpeg</a> indirin</p>
+    <p><a href="https://ollama.com/">ollama</a> indirin</p>
+    <p><a href="https://tesseract-ocr.github.io/">tesseract-ocr</a> indirin</p>
+</div>
+<div class="box code">
+    <code>git clone https://github.com/KaracaAI/KaracaNLP.git</code>
+    <code>cd karaca<br></code>
+    <code>pip install -r requirements.txt</code>
+</div>
+
+<h3>Özellikler</h3>
+<h4>Abbys</h4>
+<p>.aby dosyalarını sıkıştırma ve çıkarma işlevleri.</p>
+
+<h4>Model</h4>
+<p>Sınıflandırma modelleri oluşturmak için araçlar.</p>
+
+<h4>Normalize</h4>
+<p>Metin normalizasyonu için işlevler, sayıdan kelimeye dönüştürme ve metin temizleme dahil.</p>
+
+<h4>ProcessMedia</h4>
+<p>Ses dosyalarını metne dönüştürme, altyazı oluşturma ve PDF işleme işlevleri.</p>
+
+<h4>ProcessText</h4>
+<p>Çeşitli metin işleme görevleri için araçlar, normalizasyon ve metin analizi dahil.</p>
+
+<h4>ProcessWithAI</h4>
+<p>Haber analizi, duygu analizi ve çeviri yapma araçları.</p>
+
+<h4>TextGenerator</h4>
+<p>Metin üretme ve oluşturma işlevleri.</p>
+{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+    <div class="box">
+        <h1>Normalize Sınıfı</h1>
+        <h2>Genel Bakış</h2>
+        <p>`Normalize` sınıfı, durak kelimeleri, kötü kelimeleri kaldırma ve sayıları kelimelere dönüştürme gibi metin normalizasyon görevleri için yöntemler sağlar.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>numberToWord:</strong> Bir sayıyı Türkçe kelime karşılığına dönüştürür.</li>
+            <li><strong>removeStopwords:</strong> Metinden durak kelimeleri kaldırır.</li>
+            <li><strong>removeBadWords:</strong> Metinden kötü kelimeleri kaldırır ve kaç tane kaldırıldığını sayar.</li>
+            <li><strong>loadStopwords:</strong> Durak kelimeleri bir dosyadan veya verilen bir listeden yükler.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Sayıyı Kelimeye Dönüştürme</h3>
+        <pre class="code">
+<code>Normalize.numberToWord(number)</code></pre>
+        <p>Verilen bir sayıyı Türkçe kelime karşılığına dönüştürür.</p>
+
+        <h3>Durak Kelimeleri Kaldırma</h3>
+        <pre class="code">
+<code>Normalize.removeStopwords(text, stopwords=None)</code></pre>
+        <p>Metinden durak kelimeleri kaldırır. İsteğe bağlı olarak, bir durak kelime listesi sağlayabilirsiniz.</p>
+
+        <h3>Kötü Kelimeleri Kaldırma</h3>
+        <pre class="code">
+<code>Normalize.removeBadWords(text, stopwords=None)</code></pre>
+        <p>Metinden kötü kelimeleri kaldırır ve kaç tane kaldırıldığını sayar. İsteğe bağlı olarak, bir kötü kelime listesi sağlayabilirsiniz.</p>
+
+        <h3>Durak Kelimeleri Yükleme</h3>
+        <pre class="code">
+<code>Normalize.loadStopwords(stop_words_source)</code></pre>
+        <p>Durak kelimeleri bir dosyadan veya verilen bir set/listeden yükler.</p>
+    </div>
+
+    <div class="box">
+        <h1>ProcessText Sınıfı</h1>
+        <h2>Genel Bakış</h2>
+        <p>`ProcessText` sınıfı, metin işleme ve analiz etme için çeşitli yöntemler sunar, bunlar arasında normalizasyon, tokenizasyon ve okunabilirlik analizi bulunmaktadır.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>lowerText:</strong> Metni küçük harfe çevirir ve belirli karakter değişiklikleri yapar.</li>
+            <li><strong>upperText:</strong> Metni büyük harfe çevirir ve belirli karakter değişiklikleri yapar.</li>
+            <li><strong>removePunc:</strong> Metinden noktalama işaretlerini kaldırır.</li>
+            <li><strong>accentMarkRemove:</strong> Karakterlerden aksan işaretlerini kaldırır.</li>
+            <li><strong>numToTRText:</strong> Metindeki sayıları Türkçe kelime karşılıklarına dönüştürür.</li>
+            <li><strong>removeNumber:</strong> Metinden sayıları kaldırır.</li>
+            <li><strong>normalize_chars:</strong> Belirli Türkçe karakterleri normalize eder.</li>
+            <li><strong>wordCounter:</strong> Bir cümledeki kelime sayısını hesaplar.</li>
+            <li><strong>wordExtractor:</strong> Bir cümleden kelimeleri çıkarır.</li>
+            <li><strong>sentenceCounter:</strong> Bir paragraftaki cümle sayısını hesaplar.</li>
+            <li><strong>avarageWordCountPerSentence:</strong> Bir cümledeki ortalama kelime sayısını hesaplar.</li>
+            <li><strong>syllableCounter:</strong> Metindeki hece sayısını hesaplar.</li>
+            <li><strong>reabilityTime:</strong> Ortalama okuma hızına göre metni okuma süresini tahmin eder.</li>
+            <li><strong>readabilityScore:</strong> Metnin okunabilirlik skorunu hesaplar.</li>
+            <li><strong>frequencyCalculator:</strong> Metindeki kelime frekanslarını hesaplar.</li>
+            <li><strong>phoneticTransform:</strong> Metni fonetik temsilini dönüştürür.</li>
+            <li><strong>sentenceTokenizer:</strong> Metni cümlelere ayırır.</li>
+            <li><strong>findIdioms:</strong> Metindeki deyimleri, önceden tanımlanmış bir listeye dayanarak bulur.</li>
+            <li><strong>calculateSimilarity:</strong> İki metin arasındaki benzerliği cümle gömme kullanarak hesaplar.</li>
+            <li><strong>deasciify:</strong> ASCII metni Türkçe karakterlere dönüştürür.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Metni Küçük Harfe Çevirme</h3>
+        <pre class="code">
+<code>ProcessText.lowerText(text)</code></pre>
+        <p>Verilen metni küçük harfe çevirir ve belirli karakter değişiklikleri yapar.</p>
+
+        <h3>Metni Büyük Harfe Çevirme</h3>
+        <pre class="code">
+<code>ProcessText.upperText(text)</code></pre>
+        <p>Verilen metni büyük harfe çevirir ve belirli karakter değişiklikleri yapar.</p>
+
+        <h3>Noktalama İşaretlerini Kaldırma</h3>
+        <pre class="code">
+<code>ProcessText.removePunc(text)</code></pre>
+        <p>Verilen metinden noktalama işaretlerini kaldırır.</p>
+
+        <h3>Aksan İşaretlerini Kaldırma</h3>
+        <pre class="code">
+<code>ProcessText.accentMarkRemove(text, accentMap=None)</code></pre>
+        <p>Metindeki karakterlerden aksan işaretlerini kaldırır. İsteğe bağlı olarak, özel bir aksan haritası sağlayabilirsiniz.</p>
+
+        <h3>Sayıları Türkçe Metne Çevirme</h3>
+        <pre class="code">
+<code>ProcessText.numToTRText(text)</code></pre>
+        <p>Metindeki sayıları Türkçe kelime karşılıklarına dönüştürür.</p>
+
+        <h3>Sayıları Kaldırma</h3>
+        <pre class="code">
+<code>ProcessText.removeNumber(text, signed=True, decimal=True)</code></pre>
+        <p>Metinden sayıları kaldırır. İşaretli ve ondalıklı sayılar için seçenekler sunar.</p>
+
+        <h3>Karakterleri Normalize Etme</h3>
+        <pre class="code">
+<code>ProcessText.normalize_chars(text, charTable=None)</code></pre>
+        <p>Metindeki belirli Türkçe karakterleri normalize eder. İsteğe bağlı olarak, özel bir karakter tablosu sağlayabilirsiniz.</p>
+
+        <h3>Kelime Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.wordCounter(sentence)</code></pre>
+        <p>Verilen bir cümledeki kelime sayısını hesaplar.</p>
+
+        <h3>Kelimeleri Çıkarma</h3>
+        <pre class="code">
+<code>ProcessText.wordExtractor(sentence)</code></pre>
+        <p>Verilen bir cümleden kelimeleri çıkarır.</p>
+
+        <h3>Cümle Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.sentenceCounter(paragraph)</code></pre>
+        <p>Verilen bir paragraftaki cümle sayısını hesaplar.</p>
+
+        <h3>Cümle Başına Ortalama Kelime Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.avarageWordCountPerSentence(text)</code></pre>
+        <p>Metindeki cümle başına ortalama kelime sayısını hesaplar.</p>
+
+        <h3>Hece Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.syllableCounter(text)</code></pre>
+        <p>Metindeki hece sayısını hesaplar.</p>
+
+        <h3>Okuma Süresi</h3>
+        <pre class="code">
+<code>ProcessText.reabilityTime(text, avaregeReadTime=190)</code></pre>
+        <p>Ortalama okuma hızına göre metni okuma süresini tahmin eder.</p>
+
+        <h3>Okunabilirlik Skoru</h3>
+        <pre class="code">
+<code>ProcessText.readabilityScore(text)</code></pre>
+        <p>Metnin okunabilirlik skorunu hesaplar ve çeşitli seviyelere ayırır.</p>
+
+        <h3>Frekans Hesaplama</h3>
+        <pre class="code">
+<code>ProcessText.frequencyCalculator(text)</code></pre>
+        <p>Metindeki kelime frekanslarını hesaplar.</p>
+
+        <h3>Fonetik Dönüşüm</h3>
+        <pre class="code">
+<code>ProcessText.phoneticTransform(text)</code></pre>
+        <p>Metni fonetik temsilini dönüştürür.</p>
+
+        <h3>Cümle Tokenizasyonu</h3>
+        <pre class="code">
+<code>ProcessText.sentenceTokenizer(text)</code></pre>
+        <p>Metni cümlelere ayırır.</p>
+
+        <h3>Deyimleri Bulma</h3>
+        <pre class="code">
+<code>ProcessText.findIdioms(text)</code></pre>
+        <p>Metindeki deyimleri, önceden tanımlanmış bir listeye dayanarak bulur.</p>
+
+        <h3>Benzerlik Hesaplama</h3>
+        <pre class="code">
+<code>ProcessText.calculateSimilarity(text1, text2, modelName="dbmdz/bert-base-turkish-cased")</code></pre>
+        <p>İki metin arasındaki benzerliği cümle gömme kullanarak hesaplar.</p>
+
+        <h3>Deasciify</h3>
+        <pre class="code">
+<code>ProcessText.deasciify(text)</code></pre>
+        <p>ASCII metni Türkçe karakterlere dönüştürür.</p>
+    </div>
+{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+    <div class="box">
+        <h1>MediaToText</h1>
+        <h2>Genel Bakış</h2>
+        <p>`MediaToText` sınıfı, medya dosyalarını metne dönüştürmek için yöntemler sağlar. Bu sınıf, bağımlılıkları kontrol etme, dosyaları dönüştürme, sesleri transkribe etme ve video dosyalarından altyazı oluşturma işlevlerini içerir.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>Bağımlılık Kontrolü:</strong> Sistem üzerinde `ffmpeg`'in kurulu olup olmadığını doğrular.</li>
+            <li><strong>Sesi WAV Formatına Dönüştürme:</strong> Ses veya video dosyalarını WAV formatına dönüştürür.</li>
+            <li><strong>Ses Transkripsiyonu:</strong> Ses dosyalarını metne dönüştürmek için Whisper modelini kullanır.</li>
+            <li><strong>Altyazı Oluşturma:</strong> Video segmentlerinden ses çıkarır ve SRT formatında altyazılar oluşturur.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>`ffmpeg`'in Kurulu Olup Olmadığını Kontrol Et</h3>
+        <pre class="code">
+<code>generator.check_ffmpeg()</code></pre>
+        <p>Sistem üzerinde `ffmpeg`'in kurulu olup olmadığını kontrol eder. Bulunamazsa bir hata oluşturur.</p>
+
+        <h3>WAV Formatına Dönüştürme</h3>
+        <pre class="code">
+<code>wav_file = generator.convert_to_wav(
+    input_file
+)
+</code></pre>
+        <p>Bir ses veya video dosyasını WAV formatına dönüştürür.</p>
+
+        <h3>Ses Transkripsiyonu</h3>
+        <pre class="code">
+<code>text = generator.transcribe_audio(
+    input_file, 
+    model_name="large-v3", 
+    device="cpu"
+)
+</code></pre>
+        <p>Belirtilen dosyadan ses transkripsiyonu yapar ve Whisper modelini kullanır.</p>
+
+        <h3>Altyazı Oluşturma</h3>
+        <pre class="code">
+<code>generator.createSubtitles(
+    videoPath, 
+    outputFile, 
+    segment_duration=5
+)
+</code></pre>
+        <p>Bir video dosyasından ses segmentleri çıkarır ve SRT ve TXT formatlarında altyazılar oluşturur.</p>
+    </div>
+
+    <div class="box">
+        <h1>OCRProcessor: Optik Karakter Tanıma</h1>
+        <h2>Genel Bakış</h2>
+        <p>`OCRProcessor` sınıfı, Tesseract kullanarak Optik Karakter Tanıma (OCR) görevlerini yönetir. Bu sınıf, metin çıkarımı, görüntü ön işleme ve sınırlayıcı kutu görselleştirme işlevlerini içerir.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>OCR Kurulumu:</strong> İşletim sistemine göre Tesseract OCR yolunu yapılandırır.</li>
+            <li><strong>Görüntü Ön İşleme:</strong> Daha iyi OCR sonuçları için görüntüleri ön işler.</li>
+            <li><strong>Metin Çıkarma:</strong> Görüntülerden metin çıkarır ve gerekirse dosyaya kaydeder.</li>
+            <li><strong>Sınırlayıcı Kutu Çizme:</strong> Görüntülerdeki tespit edilen metinlerin etrafına sınırlayıcı kutular çizer.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Görüntü İşleme</h3>
+        <pre class="code">
+<code>ocr_processor = OCRProcessor(
+    outputText=True, 
+    saveBoxes=False
+)
+ocr_processor.process(
+    image_path
+)
+</code></pre>
+        <p>Bir görüntüden metin çıkarır, isteğe bağlı olarak sınırlayıcı kutular çizer ve çıktıyı kaydeder.</p>
+
+        <h3>PDF'den Metin Çıkarma</h3>
+        <pre class="code">
+<code>pdf_text = PDFProcessor.pdfToText(
+    pdfPath, 
+    outputTxtPath="output.txt", 
+    outputFile=True
+)
+</code></pre>
+        <p>Bir PDF dosyasından metin çıkarır ve isteğe bağlı olarak TXT dosyasına kaydeder.</p>
+    </div>
+{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+<h1>ModelGen</h1>
+<h2 id="overview">Genel Bakış</h2>
+<p>`ModelGen`, metin sınıflandırma modelleri oluşturmak ve eğitmek için kullanılan bir Python sınıfıdır. Veri işleme, model eğitimi ve değerlendirmeyi verimli bir şekilde gerçekleştirir.</p>
+
+<div class="box">
+    <h2 id="features">Özellikler</h2>
+    <ul>
+        <li><strong>Veri İşleme:</strong> CSV dosyasından veri okur, etiketleri sayısal değerlere dönüştürür ve veri setini eğitim, doğrulama ve test setlerine böler.</li>
+        <li><strong>Model ve Tokenizer:</strong> Metin verilerini işlemek için önceden eğitilmiş modeller ve tokenizer'lar kullanır.</li>
+        <li><strong>Özel Veri Seti ve DataLoader:</strong> Eğitim sırasında verileri yönetmek için bir veri seti sınıfı ve veri yükleyiciler uygular.</li>
+        <li><strong>Eğitim ve Değerlendirme:</strong> Belirtilen epoch sayısı boyunca modeli eğitir, eğitim ve doğrulama kayıplarını hesaplar ve modeli test setinde değerlendirir.</li>
+        <li><strong>Sonuçları Kaydetme ve Görselleştirme:</strong> Değerlendirme sonuçlarını, eğitim ilerlemesini kaydeder ve görselleştirmeler oluşturur.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2 id="usage">Kullanım</h2>
+    <pre class="code">
+<code>ModelGen.generateClassificationModel(
+dataPath, 
+modelName, 
+labelColumn, 
+textColumn, 
+saveDir="generatedModel", 
+batchSize=12, 
+maxLength=60, 
+numEpochs=3, 
+learningRate=1e-5
+)
+</code></pre>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>dataPath:</strong> CSV dosyasının yolu.</li>
+        <li><strong>modelName:</strong> Kullanılacak önceden eğitilmiş modelin adı (örneğin, "bert-base-uncased").</li>
+        <li><strong>labelColumn:</strong> Etiketleri içeren sütun adı.</li>
+        <li><strong>textColumn:</strong> Metin verilerini içeren sütun adı.</li>
+        <li><strong>saveDir:</strong> Eğitilen modelin ve tokenizer'ın kaydedileceği dizin.</li>
+        <li><strong>batchSize:</strong> Eğitim sırasında kullanılacak batch boyutu.</li>
+        <li><strong>maxLength:</strong> Tokenizer için maksimum token uzunluğu.</li>
+        <li><strong>numEpochs:</strong> Modeli eğitmek için epoch sayısı.</li>
+        <li><strong>learningRate:</strong> Eğitim için öğrenme oranı.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>CSV dosyasını işler, verileri eğitim, doğrulama ve test setlerine böler. Önceden eğitilmiş bir model ve tokenizer yükler. Modeli eğitir ve doğrulama ve test setlerinde değerlendirir. Değerlendirme sonuçlarını ve eğitim ilerlemesini dosyalara kaydeder. Eğitim ve doğrulama ilerlemesini gösteren grafikler oluşturur ve kaydeder.</p>
+</div>
+
+<div class="box">
+    <h2 id="results-saved">Kaydedilen Sonuçlar</h2>
+    <ul>
+        <li><strong>badLines.txt:</strong> CSV dosyasındaki sorunlu satırları içerir.</li>
+        <li><strong>labelMapping.txt:</strong> Etiketleri karşılık gelen indekslere eşler.</li>
+        <li><strong>evaluationResults.txt:</strong> Test sonuçlarını, sınıflandırma raporunu ve karışıklık matrisini içerir.</li>
+        <li><strong>training_progress.png:</strong> Eğitim ve doğrulama kayıplarını ve doğrulama doğruluğunu gösteren grafikler.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2 id="example-usage">Örnek Kullanım</h2>
+    <pre class="code">
+<code>ModelGen.generateClassificationModel(
+"data.csv",
+"bert-base-uncased",
+"label",
+"text",
+saveDir="my_model",
+batchSize=16,
+maxLength=128,
+numEpochs=4,
+learningRate=2e-5
+)
+</code></pre>
+</div>
+{% endblock %}
+
+
+{% block content %}
+    <div class="box">
+        <h1>Abyss</h1>
+        <h2>Genel Bakış</h2>
+        <p>`Abyss`, model dosyalarını özel bir ikili format (.aby) içine sıkıştıran ve çıkaran bir Python sınıfıdır. Sıralama sınıflandırması ve Adlandırılmış Varlık Tanıma (NER) görevleri için modelleri ve tokenizasyonları kaydetme ve yükleme destekler.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>Sıkıştırma:</strong> Model dosyalarını içeren klasörleri .aby dosya formatına sıkıştırır.</li>
+            <li><strong>Çıkarma:</strong> .aby dosyasının içeriğini belirtilen bir dizine çıkarır.</li>
+            <li><strong>Model Yükleme:</strong> Çıkarılmış bir .aby dosyasından bir sıralama sınıflandırma modeli veya NER boru hattı yükler.</li>
+            <li><strong>Geçici Klasör Yönetimi:</strong> Model çıkarımı ve sıkıştırma için geçici klasörleri yönetir.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Klasörü Sıkıştır</h3>
+        <pre class="code">
+<code>Abyss.compressFolder(
+    folder_path, 
+    aby_path
+)
+</code></pre>
+        <p>Bir klasörü .aby dosyasına sıkıştırır.</p>
+
+        <h3>.aby Dosyasını Çıkar</h3>
+        <pre class="code">
+<code>Abyss.extractAby(
+    aby_path, 
+    extract_to=None
+)
+</code></pre>
+        <p>Bir .aby dosyasını belirtilen dizine çıkarır veya .aby dosyasıyla aynı adı taşıyan bir dizin oluşturur.</p>
+
+        <h3>Model için Çıkar</h3>
+        <pre class="code">
+<code>Abyss.extractForModel(
+    aby_path
+)
+</code></pre>
+        <p>Bir .aby dosyasından bir model ve tokenizer çıkarır ve sıralama sınıflandırma görevleri için geri döner.</p>
+
+        <h3>NER Modeli için Çıkar</h3>
+        <pre class="code">
+<code>Abyss.extractForNerModel(
+    aby_path
+)
+</code></pre>
+        <p>Bir .aby dosyasından bir NER boru hattı çıkarır ve Adlandırılmış Varlık Tanıma görevleri için geri döner.</p>
+
+        <h3>Modeli Sıkıştır</h3>
+        <pre class="code">
+<code>Abyss.modelCompress(
+    model_name_or_path, 
+    aby_path
+)
+</code></pre>
+        <p>Belirtilen yoldan bir model ve tokenizer'ı .aby dosyasına sıkıştırır.</p>
+
+        <h3>Geçici Dosyaları Kaldır</h3>
+        <pre class="code">
+<code>Abyss.removeTemp(
+    path
+)
+</code></pre>
+        <p>Belirtilen geçici dizini kaldırır.</p>
+    </div>
+{% endblock %}

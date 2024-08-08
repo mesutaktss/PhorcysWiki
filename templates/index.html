@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Hoşgeldiniz!</h1>
+<h2>Phorcys Kütüphanesi Genel Bakış</h2>
+
+<p>Phorcys, metin işleme ve analiz için geniş bir işlevsellik yelpazesi sunan kapsamlı bir Türkçe Doğal Dil İşleme (NLP) kütüphanesidir. Medya işlemden metin normalizasyonuna ve model yönetimine kadar çeşitli NLP alanlarını ele alan araçlar içerir. İşte Phorcys kütüphanesinde mevcut olan ana modüllerin genel bir bakışı:</p>
+
+<h3>Kurulum</h3>
+<div class="boxy">
+    <h4>Gereksinimler</h4>
+    <p>Phorcys'i kurmadan önce aşağıdaki gereksinimlerin karşılandığından emin olun:</p>
+    <p>Python 3.6 veya daha yüksek bir sürüm</p>
+    <p><a href="https://www.ffmpeg.org/">ffmpeg</a> indirin</p>
+    <p><a href="https://ollama.com/">ollama</a> indirin</p>
+    <p><a href="https://tesseract-ocr.github.io/">tesseract-ocr</a> indirin</p>
+</div>
+<div class="box code">
+    <code>git clone https://github.com/KaracaAI/KaracaNLP.git</code>
+    <code>cd karaca<br></code>
+    <code>pip install -r requirements.txt</code>
+</div>
+
+<h3>Özellikler</h3>
+<h4>Abbys</h4>
+<p>.aby dosyalarını sıkıştırma ve çıkarma işlevleri.</p>
+
+<h4>Model</h4>
+<p>Sınıflandırma modelleri oluşturmak için araçlar.</p>
+
+<h4>Normalize</h4>
+<p>Metin normalizasyonu için işlevler, sayıdan kelimeye dönüştürme ve metin temizleme dahil.</p>
+
+<h4>ProcessMedia</h4>
+<p>Ses dosyalarını metne dönüştürme, altyazı oluşturma ve PDF işleme işlevleri.</p>
+
+<h4>ProcessText</h4>
+<p>Çeşitli metin işleme görevleri için araçlar, normalizasyon ve metin analizi dahil.</p>
+
+<h4>ProcessWithAI</h4>
+<p>Haber analizi, duygu analizi ve çeviri yapma araçları.</p>
+
+<h4>TextGenerator</h4>
+<p>Metin üretme ve oluşturma işlevleri.</p>
+{% endblock %}

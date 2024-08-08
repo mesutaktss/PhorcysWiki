@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="box">
+        <h1>Metin Üretici</h1>
+        <h2>Genel Bakış</h2>
+        <p>`Metin Üretici` sınıfı, Ollama API kullanarak metin üretme yöntemlerini sağlar. Belirli bir modelden yanıtlar üretme, dummy metin oluşturma ve yanıt üretim sürecinde meydana gelen hataları yönetme gibi özellikleri destekler.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>Metin Üretimi:</strong> Verilen bir isteme dayanarak metin üretir ve Ollama API kullanır.</li>
+            <li><strong>Yanıt Yönetimi:</strong> Ollama sohbet hizmetinden gelen yanıtları ve hataları yönetir.</li>
+            <li><strong>Dummy Metin Oluşturma:</strong> Belirli bir kelime sayısına sahip dummy metin oluşturur.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Üreticiyi Başlat</h3>
+        <pre class="code">
+<code>generator = TextGenerator(
+    model_name="brooqs/mistral-turkish-v2"
+)
+</code></pre>
+        <p>Belirtilen model adı ile `TextGenerator` sınıfının bir örneğini oluşturur.</p>
+
+        <h3>Metin Üret</h3>
+        <pre class="code">
+<code>generator.generateText(
+    prompt
+)
+</code></pre>
+        <p>Belirtilen model kullanılarak sağlanan isteme dayanarak metin üretir.</p>
+
+        <h3>Yanıt Üret</h3>
+        <pre class="code">
+<code>TextGenerator.generateResponse(
+    model_name, 
+    prompt
+)
+</code></pre>
+        <p>Belirtilen model ve istemden yanıt üretir. `ollama.chat` işlevi başarısız olursa hataları yönetir.</p>
+
+        <h3>Dummy Metin Oluştur</h3>
+        <pre class="code">
+<code>TextGenerator.createDummyText(
+    num_words
+)
+</code></pre>
+        <p>Önceden tanımlanmış bir dosyadan belirli sayıda kelime içeren dummy metin oluşturur.</p>
+    </div>
+{% endblock %}

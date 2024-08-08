@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}Phorcys Wiki{% endblock %}</title>
+</head>
+<body>
+    <div class="top-bar">
+        <h3>Phorcys Wiki</h3>
+    </div>
+    <div class="bot">
+        <div class="sidebar">
+            <ul class="sidebar-ul">
+                <li class="sidebar-item"><a href="/">Home</a></li>
+                <li class="sidebar-item"><a href="/ProcessText">Process Text</a></li>
+                <li class="sidebar-item"><a href="/ProcessMedia">Process Media</a></li>
+                <li class="sidebar-item"><a href="/AIProcessText">Process With AI</a></li>
+                <li class="sidebar-item"><a href="/GenerateText">Generate Text</a></li>
+                <li class="sidebar-item"><a href="/Model">Model</a></li>
+                <li class="sidebar-item"><a href="/Abyss">Abyss</a></li>
+            </ul>
+        </div>
+        <div class="content">
+            {% block content %}{% endblock %}
+        </div>        
+        <div class="sidebar">
+            <ul class="sidebar-ul">
+                <h3 class="li">Demo</h3>
+                <li class="sidebar-item"><a href="/App">Text Process</a></li>
+                <li class="sidebar-item"><a href="/Chat">Chat</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

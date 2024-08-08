@@ -1,0 +1,231 @@
+*{
+    font-family: "Roboto";
+    margin: 0;
+    padding: 0;
+}
+h1, h2, h3, h4, h5, h6, p, li, ul, a{
+    color: #1A1A1A;
+}
+h3.li{
+    text-align: center;
+}
+code {
+    font-family: "Roboto Mono";
+    color: 1A1A1A;
+    padding: 2px;
+    font-size: 105%;
+  }
+body {
+    background-color: #fcfcfc;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    height: 100%;
+}
+h1{
+    font-size: 2.75rem;
+}
+h2{
+    font-size: 2rem;
+}
+h3{
+    font-size: 1.75rem;
+}
+h4{
+    font-size: 1.50rem;
+}
+p{
+    font-size: 1.25rem;
+}
+li{
+    font-size: 1.25rem;
+}
+a{
+    color: #32AFAF;
+    text-decoration: underline;
+}
+a.side{
+    text-decoration: none;
+    align-items: center;
+    max-width: 300px;
+    height: 50px;
+    width: 100%;
+}
+.box{
+    padding: 10px;
+    display: flex;
+    width: calc(100% - 30px);
+    flex-direction: column;
+    border-radius: 10px;
+    gap: 0.5rem;
+}
+div.si{
+    max-width: 300px;
+    border-radius: 10px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fcfcfc;
+    width: 100%;
+}
+.danger{
+    border: solid 5px #AF3232;
+    background-color: #DFBBBB;
+    border-radius: 10px;
+}
+.success{
+    border: solid 5px #32AF32;
+    background-color: #BBDFBB;
+    border-radius: 10px;
+}
+.warning{
+    border: solid 5px #AFAF32;
+    background-color: #DFDFBB;
+    border-radius: 10px;
+}
+.primary{
+    border: solid 5px #3232AF;
+    background-color: #BBBBDF;
+    border-radius: 10px;
+}
+.code{
+    border: solid 5px #DFDFDF;
+    background-color: #e9e9e9;
+    border-radius: 10px;
+    padding: 10px;
+    font-family: 'Roboto Mono';
+}
+.info{
+    border: solid 5px #32AFAF;
+    background-color: #BBDFDF;
+    border-radius: 10px;
+}
+div.bot{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.top-bar {
+    width:calc(100% - 40px);
+    background-color: #fcfcfc;
+    backdrop-filter: blur(4px);
+    color: #1A1A1A;
+    padding: 0 18px;
+    display: flex;
+    flex-direction: row;
+    height: 3.75rem;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+    position: sticky;
+    border: solid 2px #BDBDBD;
+    border-right: solid 2px #BDBDBD;
+}
+
+.top-bar .menu-icon {
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    display: none;
+}
+
+ul {
+    list-style: none; /* Varsayılan madde işaretlerini kaldır */
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.ul li {
+    width: 100%;
+    position: relative;
+    line-height: 200%;
+    padding-left: 0; /* Liste öğeleri arasındaki boşluk */
+    margin-bottom: 0px; /* Her madde arasında boşluk */
+    width: 0.1rem; /* Çizginin kalınlığı */
+    height: 100%; /* Çizginin yüksekliği */
+    background-color: #1A1A1A; /* Çizginin rengi */
+}
+
+li.sidebar-item {
+    border: solid 2px #BDBDBD;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+.sidebar-ul{
+    position: sticky;
+}
+.sidebar {
+    width: 200px;
+    padding: 10px;
+    background-color: #fcfcfc;
+    border-right: solid 2px #BDBDBD;
+    border-left: solid 2px #BDBDBD;
+    color: #1A1A1A;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    gap: 10px;
+    bottom: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+    transform: translateX(0);
+}
+
+.sidebar.active {
+    transform: translateX(-200px);
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+.sidebar ul li a {
+    color: #1A1A1A;
+    text-decoration: none;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    flex: 1;
+}
+.boxy {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1;
+}
+@media (max-width: 768px) {
+    .sidebar{
+        width: calc(100% - 4px);
+        height: auto;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        border: solid 2px #BDBDBD;
+        flex-wrap: wrap;
+    }
+    div.bot{
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+
+    }
+}

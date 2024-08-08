@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Processing</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+</head>
+<body>
+    <div class="content">
+        <div class="container">
+            <div class="name"><h2>Metin İşleme</h2></div>
+            <form method="POST">
+                <textarea name="text"></textarea>
+                <label>
+                    <input type="checkbox" name="process_sentences"> Cümle cümle işle
+                </label>
+                <div class="submit">
+                    <input class="button" type="submit" value="Gönder">
+                    <select name="function" id="function">
+                        <option value="upperText">Büyük Harfe Çevir</option>
+                        <option value="lowerText">Küçük Harfe Çevir</option>
+                        <option value="removePunc">Noktalama İşaretlerini Kaldır</option>
+                        <option value="accentMarkRemove">Aksan İşaretlerini Kaldır</option>
+                        <option value="numToTRText">Sayılardan Metin Oluştur</option>
+                        <option value="removeNumber">Sayılardan Kurtul</option>
+                        <option value="normalizeChars">Karakterleri Normalleştir</option>
+                        <option value="wordCounter">Kelime Sayısı</option>
+                        <option value="wordExtractor">Kelimeleri Çıkar</option>
+                        <option value="sentenceCounter">Cümle Sayısı</option>
+                        <option value="avarageWordCountPerSentence">Cümle Başına Ortalama Kelime Sayısı</option>
+                        <option value="syllableCounter">Hece Sayısı</option>
+                        <option value="reabilityTime">Okuma Süresi</option>
+                        <option value="readabilityScore">Okunabilirlik Skoru</option>
+                        <option value="frequencyCalculator">Frekans Hesapla</option>
+                        <option value="phoneticTransform">Fonetik Dönüşüm</option>
+                        <option value="sentenceTokenizer">Cümle Tokenizer</option>
+                        <option value="findIdioms">Deyimler Bul</option>
+                        <option value="calculateSimilarity">Benzerlik Hesapla</option>
+                        <option value="deasciify">ASCII'den Çıkar</option>
+                        <option value="NewsAnalysis">Haber Analizi</option>
+                        <option value="OffensiveLanguageAnalysis">Saldırgan Dil Analizi</option>
+                        <option value="DetailedEmotionAnalysis">Detaylı Duygu Analizi</option>
+                        <option value="SimpleEmotionAnalysis">Basit Duygu Analizi</option>
+                        <option value="BullyingAnalysis">Siber Zorbalık Analizi</option>
+                        <option value="TranslateToTurkish">Türkçeye Çevir</option>
+                        <option value="TranslateToEnglish">İngilizceye Çevir</option>
+                        <option value="NERAnalysis">Ad Öbeği Tanıma (NER) Analizi</option>
+                        <option value="EntityBasedSentimentAnalysis">Varlık Bazlı Duygu Analizi</option>
+                    </select>
+
+                </div>
+            </form>
+        </div>
+        <div class="container">
+            <div class="name"><h2>İşlenmiş Metin</h2></div>
+                <textarea readonly>{% if result %}{% if result is string %}{{ result }}{% else %}{% for item in result %}
+{{ item }}
+{% endfor %}{% endif %}{% endif %}</textarea>
+        </div>
+    </div>
+    <script>
+        async function processText() {
+            const text = document.getElementById('inputText').value.trim();
+            const functionName = document.getElementById('functionSelect').value;
+            const processBySentences = document.getElementById('processSentences').checked;
+
+            if (!text) return;
+
+            try {
+                const response = await fetch('/App', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    },
+                    body: new URLSearchParams({
+                        text: text,
+                        function: functionName,
+                        process_sentences: processBySentences ? 'on' : ''
+                    })
+                });
+
+                if (response.ok) {
+                    const result = await response.text();
+                    displayResults(result);
+                } else {
+                    const error = await response.text();
+                    alert('Error: ' + error);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+
+        function displayResults(result) {
+            const resultContainer = document.getElementById('resultContainer');
+            resultContainer.innerHTML = '';  // Clear previous results
+
+            // Handle text with special tags (||| for sentences)
+            const sentences = result.split('|||');  // Split by your chosen tag
+            sentences.forEach(sentence => {
+                if (sentence.trim()) {
+                    const sentenceElement = document.createElement('div');
+                    sentenceElement.classList.add('sentence');
+                    sentenceElement.textContent = sentence;
+                    resultContainer.appendChild(sentenceElement);
+                }
+            });
+        }
+    </script>
+</body>
+</html>

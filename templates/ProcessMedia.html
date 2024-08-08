@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="box">
+        <h1>MediaToText</h1>
+        <h2>Genel Bakış</h2>
+        <p>`MediaToText` sınıfı, medya dosyalarını metne dönüştürmek için yöntemler sağlar. Bu sınıf, bağımlılıkları kontrol etme, dosyaları dönüştürme, sesleri transkribe etme ve video dosyalarından altyazı oluşturma işlevlerini içerir.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>Bağımlılık Kontrolü:</strong> Sistem üzerinde `ffmpeg`'in kurulu olup olmadığını doğrular.</li>
+            <li><strong>Sesi WAV Formatına Dönüştürme:</strong> Ses veya video dosyalarını WAV formatına dönüştürür.</li>
+            <li><strong>Ses Transkripsiyonu:</strong> Ses dosyalarını metne dönüştürmek için Whisper modelini kullanır.</li>
+            <li><strong>Altyazı Oluşturma:</strong> Video segmentlerinden ses çıkarır ve SRT formatında altyazılar oluşturur.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>`ffmpeg`'in Kurulu Olup Olmadığını Kontrol Et</h3>
+        <pre class="code">
+<code>generator.check_ffmpeg()</code></pre>
+        <p>Sistem üzerinde `ffmpeg`'in kurulu olup olmadığını kontrol eder. Bulunamazsa bir hata oluşturur.</p>
+
+        <h3>WAV Formatına Dönüştürme</h3>
+        <pre class="code">
+<code>wav_file = generator.convert_to_wav(
+    input_file
+)
+</code></pre>
+        <p>Bir ses veya video dosyasını WAV formatına dönüştürür.</p>
+
+        <h3>Ses Transkripsiyonu</h3>
+        <pre class="code">
+<code>text = generator.transcribe_audio(
+    input_file, 
+    model_name="large-v3", 
+    device="cpu"
+)
+</code></pre>
+        <p>Belirtilen dosyadan ses transkripsiyonu yapar ve Whisper modelini kullanır.</p>
+
+        <h3>Altyazı Oluşturma</h3>
+        <pre class="code">
+<code>generator.createSubtitles(
+    videoPath, 
+    outputFile, 
+    segment_duration=5
+)
+</code></pre>
+        <p>Bir video dosyasından ses segmentleri çıkarır ve SRT ve TXT formatlarında altyazılar oluşturur.</p>
+    </div>
+
+    <div class="box">
+        <h1>OCRProcessor: Optik Karakter Tanıma</h1>
+        <h2>Genel Bakış</h2>
+        <p>`OCRProcessor` sınıfı, Tesseract kullanarak Optik Karakter Tanıma (OCR) görevlerini yönetir. Bu sınıf, metin çıkarımı, görüntü ön işleme ve sınırlayıcı kutu görselleştirme işlevlerini içerir.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>OCR Kurulumu:</strong> İşletim sistemine göre Tesseract OCR yolunu yapılandırır.</li>
+            <li><strong>Görüntü Ön İşleme:</strong> Daha iyi OCR sonuçları için görüntüleri ön işler.</li>
+            <li><strong>Metin Çıkarma:</strong> Görüntülerden metin çıkarır ve gerekirse dosyaya kaydeder.</li>
+            <li><strong>Sınırlayıcı Kutu Çizme:</strong> Görüntülerdeki tespit edilen metinlerin etrafına sınırlayıcı kutular çizer.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Görüntü İşleme</h3>
+        <pre class="code">
+<code>ocr_processor = OCRProcessor(
+    outputText=True, 
+    saveBoxes=False
+)
+ocr_processor.process(
+    image_path
+)
+</code></pre>
+        <p>Bir görüntüden metin çıkarır, isteğe bağlı olarak sınırlayıcı kutular çizer ve çıktıyı kaydeder.</p>
+
+        <h3>PDF'den Metin Çıkarma</h3>
+        <pre class="code">
+<code>pdf_text = PDFProcessor.pdfToText(
+    pdfPath, 
+    outputTxtPath="output.txt", 
+    outputFile=True
+)
+</code></pre>
+        <p>Bir PDF dosyasından metin çıkarır ve isteğe bağlı olarak TXT dosyasına kaydeder.</p>
+    </div>
+{% endblock %}

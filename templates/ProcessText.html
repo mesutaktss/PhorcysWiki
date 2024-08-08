@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="box">
+        <h1>Normalize Sınıfı</h1>
+        <h2>Genel Bakış</h2>
+        <p>`Normalize` sınıfı, durak kelimeleri, kötü kelimeleri kaldırma ve sayıları kelimelere dönüştürme gibi metin normalizasyon görevleri için yöntemler sağlar.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>numberToWord:</strong> Bir sayıyı Türkçe kelime karşılığına dönüştürür.</li>
+            <li><strong>removeStopwords:</strong> Metinden durak kelimeleri kaldırır.</li>
+            <li><strong>removeBadWords:</strong> Metinden kötü kelimeleri kaldırır ve kaç tane kaldırıldığını sayar.</li>
+            <li><strong>loadStopwords:</strong> Durak kelimeleri bir dosyadan veya verilen bir listeden yükler.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Sayıyı Kelimeye Dönüştürme</h3>
+        <pre class="code">
+<code>Normalize.numberToWord(number)</code></pre>
+        <p>Verilen bir sayıyı Türkçe kelime karşılığına dönüştürür.</p>
+
+        <h3>Durak Kelimeleri Kaldırma</h3>
+        <pre class="code">
+<code>Normalize.removeStopwords(text, stopwords=None)</code></pre>
+        <p>Metinden durak kelimeleri kaldırır. İsteğe bağlı olarak, bir durak kelime listesi sağlayabilirsiniz.</p>
+
+        <h3>Kötü Kelimeleri Kaldırma</h3>
+        <pre class="code">
+<code>Normalize.removeBadWords(text, stopwords=None)</code></pre>
+        <p>Metinden kötü kelimeleri kaldırır ve kaç tane kaldırıldığını sayar. İsteğe bağlı olarak, bir kötü kelime listesi sağlayabilirsiniz.</p>
+
+        <h3>Durak Kelimeleri Yükleme</h3>
+        <pre class="code">
+<code>Normalize.loadStopwords(stop_words_source)</code></pre>
+        <p>Durak kelimeleri bir dosyadan veya verilen bir set/listeden yükler.</p>
+    </div>
+
+    <div class="box">
+        <h1>ProcessText Sınıfı</h1>
+        <h2>Genel Bakış</h2>
+        <p>`ProcessText` sınıfı, metin işleme ve analiz etme için çeşitli yöntemler sunar, bunlar arasında normalizasyon, tokenizasyon ve okunabilirlik analizi bulunmaktadır.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>lowerText:</strong> Metni küçük harfe çevirir ve belirli karakter değişiklikleri yapar.</li>
+            <li><strong>upperText:</strong> Metni büyük harfe çevirir ve belirli karakter değişiklikleri yapar.</li>
+            <li><strong>removePunc:</strong> Metinden noktalama işaretlerini kaldırır.</li>
+            <li><strong>accentMarkRemove:</strong> Karakterlerden aksan işaretlerini kaldırır.</li>
+            <li><strong>numToTRText:</strong> Metindeki sayıları Türkçe kelime karşılıklarına dönüştürür.</li>
+            <li><strong>removeNumber:</strong> Metinden sayıları kaldırır.</li>
+            <li><strong>normalize_chars:</strong> Belirli Türkçe karakterleri normalize eder.</li>
+            <li><strong>wordCounter:</strong> Bir cümledeki kelime sayısını hesaplar.</li>
+            <li><strong>wordExtractor:</strong> Bir cümleden kelimeleri çıkarır.</li>
+            <li><strong>sentenceCounter:</strong> Bir paragraftaki cümle sayısını hesaplar.</li>
+            <li><strong>avarageWordCountPerSentence:</strong> Bir cümledeki ortalama kelime sayısını hesaplar.</li>
+            <li><strong>syllableCounter:</strong> Metindeki hece sayısını hesaplar.</li>
+            <li><strong>reabilityTime:</strong> Ortalama okuma hızına göre metni okuma süresini tahmin eder.</li>
+            <li><strong>readabilityScore:</strong> Metnin okunabilirlik skorunu hesaplar.</li>
+            <li><strong>frequencyCalculator:</strong> Metindeki kelime frekanslarını hesaplar.</li>
+            <li><strong>phoneticTransform:</strong> Metni fonetik temsilini dönüştürür.</li>
+            <li><strong>sentenceTokenizer:</strong> Metni cümlelere ayırır.</li>
+            <li><strong>findIdioms:</strong> Metindeki deyimleri, önceden tanımlanmış bir listeye dayanarak bulur.</li>
+            <li><strong>calculateSimilarity:</strong> İki metin arasındaki benzerliği cümle gömme kullanarak hesaplar.</li>
+            <li><strong>deasciify:</strong> ASCII metni Türkçe karakterlere dönüştürür.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Metni Küçük Harfe Çevirme</h3>
+        <pre class="code">
+<code>ProcessText.lowerText(text)</code></pre>
+        <p>Verilen metni küçük harfe çevirir ve belirli karakter değişiklikleri yapar.</p>
+
+        <h3>Metni Büyük Harfe Çevirme</h3>
+        <pre class="code">
+<code>ProcessText.upperText(text)</code></pre>
+        <p>Verilen metni büyük harfe çevirir ve belirli karakter değişiklikleri yapar.</p>
+
+        <h3>Noktalama İşaretlerini Kaldırma</h3>
+        <pre class="code">
+<code>ProcessText.removePunc(text)</code></pre>
+        <p>Verilen metinden noktalama işaretlerini kaldırır.</p>
+
+        <h3>Aksan İşaretlerini Kaldırma</h3>
+        <pre class="code">
+<code>ProcessText.accentMarkRemove(text, accentMap=None)</code></pre>
+        <p>Metindeki karakterlerden aksan işaretlerini kaldırır. İsteğe bağlı olarak, özel bir aksan haritası sağlayabilirsiniz.</p>
+
+        <h3>Sayıları Türkçe Metne Çevirme</h3>
+        <pre class="code">
+<code>ProcessText.numToTRText(text)</code></pre>
+        <p>Metindeki sayıları Türkçe kelime karşılıklarına dönüştürür.</p>
+
+        <h3>Sayıları Kaldırma</h3>
+        <pre class="code">
+<code>ProcessText.removeNumber(text, signed=True, decimal=True)</code></pre>
+        <p>Metinden sayıları kaldırır. İşaretli ve ondalıklı sayılar için seçenekler sunar.</p>
+
+        <h3>Karakterleri Normalize Etme</h3>
+        <pre class="code">
+<code>ProcessText.normalize_chars(text, charTable=None)</code></pre>
+        <p>Metindeki belirli Türkçe karakterleri normalize eder. İsteğe bağlı olarak, özel bir karakter tablosu sağlayabilirsiniz.</p>
+
+        <h3>Kelime Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.wordCounter(sentence)</code></pre>
+        <p>Verilen bir cümledeki kelime sayısını hesaplar.</p>
+
+        <h3>Kelimeleri Çıkarma</h3>
+        <pre class="code">
+<code>ProcessText.wordExtractor(sentence)</code></pre>
+        <p>Verilen bir cümleden kelimeleri çıkarır.</p>
+
+        <h3>Cümle Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.sentenceCounter(paragraph)</code></pre>
+        <p>Verilen bir paragraftaki cümle sayısını hesaplar.</p>
+
+        <h3>Cümle Başına Ortalama Kelime Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.avarageWordCountPerSentence(text)</code></pre>
+        <p>Metindeki cümle başına ortalama kelime sayısını hesaplar.</p>
+
+        <h3>Hece Sayısı</h3>
+        <pre class="code">
+<code>ProcessText.syllableCounter(text)</code></pre>
+        <p>Metindeki hece sayısını hesaplar.</p>
+
+        <h3>Okuma Süresi</h3>
+        <pre class="code">
+<code>ProcessText.reabilityTime(text, avaregeReadTime=190)</code></pre>
+        <p>Ortalama okuma hızına göre metni okuma süresini tahmin eder.</p>
+
+        <h3>Okunabilirlik Skoru</h3>
+        <pre class="code">
+<code>ProcessText.readabilityScore(text)</code></pre>
+        <p>Metnin okunabilirlik skorunu hesaplar ve çeşitli seviyelere ayırır.</p>
+
+        <h3>Frekans Hesaplama</h3>
+        <pre class="code">
+<code>ProcessText.frequencyCalculator(text)</code></pre>
+        <p>Metindeki kelime frekanslarını hesaplar.</p>
+
+        <h3>Fonetik Dönüşüm</h3>
+        <pre class="code">
+<code>ProcessText.phoneticTransform(text)</code></pre>
+        <p>Metni fonetik temsilini dönüştürür.</p>
+
+        <h3>Cümle Tokenizasyonu</h3>
+        <pre class="code">
+<code>ProcessText.sentenceTokenizer(text)</code></pre>
+        <p>Metni cümlelere ayırır.</p>
+
+        <h3>Deyimleri Bulma</h3>
+        <pre class="code">
+<code>ProcessText.findIdioms(text)</code></pre>
+        <p>Metindeki deyimleri, önceden tanımlanmış bir listeye dayanarak bulur.</p>
+
+        <h3>Benzerlik Hesaplama</h3>
+        <pre class="code">
+<code>ProcessText.calculateSimilarity(text1, text2, modelName="dbmdz/bert-base-turkish-cased")</code></pre>
+        <p>İki metin arasındaki benzerliği cümle gömme kullanarak hesaplar.</p>
+
+        <h3>Deasciify</h3>
+        <pre class="code">
+<code>ProcessText.deasciify(text)</code></pre>
+        <p>ASCII metni Türkçe karakterlere dönüştürür.</p>
+    </div>
+{% endblock %}

@@ -1,0 +1,137 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="box">
+    <h1>ProcessWithAI</h1>
+    <h2>Genel Bakış</h2>
+    <p>ProcessWithAI sınıfı, önceden eğitilmiş modeller kullanarak metin analizi için çeşitli yöntemler sunar. Haber analizi, ayrıntılı ve basit duygu analizi ve zorbalık içeriği tespiti gibi görevleri destekler. Bu bölüm, ProcessWithAI sınıfında mevcut olan yöntemlerin genel bir özetini sağlar ve İngilizce ile Türkçe arasında çeviri, görüntüden metin çıkarımı, adlandırılmış varlık tanıma (NER) ve varlık bazlı duygu analizi gibi işlemleri içerir.</p>
+</div>
+
+<div class="box">
+    <h2>Özellikler</h2>
+    <ul>
+        <li><strong>Haber Analizi:</strong> Haber metnini önceden tanımlanmış kategorilere sınıflandırır.</li>
+        <li><strong>Saldırgan Dil Analizi:</strong> Metindeki saldırgan dil içeriğini tespit eder ve analiz eder. Bu yöntem, metindeki küfürlü veya hakaret içeren ifadeleri belirlemek için kullanılır.</li>
+        <li><strong>Ayrıntılı Duygu Analizi:</strong> Metindeki ayrıntılı duyguları önceden tanımlanmış veya özel bir etiket listesi ile tespit eder.</li>
+        <li><strong>Basit Duygu Analizi:</strong> Metindeki basit duyguları analiz eder ve sonuçları indeksler veya etiketler olarak sunar.</li>
+        <li><strong>Zorbalık Analizi:</strong> Belirtilen bir model kullanarak metindeki zorbalık içeriği örneklerini belirler.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2>Kullanım</h2>
+    <pre class="code">
+<code>ProcessWithAI.NewsAnalysis(
+modelName="Model/TurkishNewsAnalysis.aby", 
+text="Haber metninizi buraya yazın", 
+outputFile="sonuc.txt", 
+labelListStatus=True
+)
+</code></pre>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>modelName:</strong> Model yolu veya model adı (örneğin, "Model/TurkishNewsAnalysis.aby").</li>
+        <li><strong>text:</strong> Analiz edilecek metin (eğer <code>inputFile</code> sağlanıyorsa <code>None</code> kullanın).</li>
+        <li><strong>outputFile:</strong> Sonuçların kaydedileceği dosya yolu.</li>
+        <li><strong>inputFile:</strong> Metni içeren dosya yolu (eğer <code>text</code> sağlanıyorsa <code>None</code> kullanın).</li>
+        <li><strong>labelListStatus:</strong> Önceden tanımlanmış bir etiket listesi kullanılıp kullanılmayacağı (varsayılan <code>True</code>).</li>
+        <li><strong>labelList:</strong> Sınıflandırma için özel etiket listesi (varsayılan <code>None</code>).</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>Belirtilen model kullanılarak sağlanan metin veya dosya analiz edilir. Doğrulama işlemlerini yapar, girdi metnini okur, tahmin yapar ve sonuçları bir dosyaya çıkartır veya doğrudan döndürür.</p>
+</div>
+
+<div class="box">
+    <h2>Sonuçlar</h2>
+    <ul>
+        <li><strong>outputFile.txt:</strong> Analizin sonucunu içerir; bu, tahmin edilen sınıf indeksini veya etiketi olabilir.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2>Örnek Kullanım</h2>
+    <pre class="code">
+<code>ProcessWithAI.DetailedEmotionAnalysis(
+modelName="Model/TurkishDetailedEmotionAnalysis.aby",
+text="Duygu metninizi buraya yazın",
+outputFile="ayrintili_duygu_sonucu.txt"
+)
+</code></pre>
+</div>
+
+<div class="box">
+    <h2>TranslateToTurkish</h2>
+    <p>İngilizce metni belirtilen bir model kullanarak Türkçeye çevirir. Bu yöntem, metni doğrudan veya dosyadan işleyebilir ve `.aby` formatındaki modellerle çalışır.</p>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>modelName:</strong> Model tanımlayıcısı veya yolu (varsayılan: "Helsinki-NLP/opus-tatoeba-en-tr").</li>
+        <li><strong>text:</strong> Çevrilecek metin.</li>
+        <li><strong>outputFile:</strong> Çevrilen metnin yazılacağı dosya.</li>
+        <li><strong>inputFile:</strong> Metnin okunacağı dosya.</li>
+        <li><strong>labelListStatus:</strong> Etiket listesi kullanılıp kullanılmayacağını belirten boolean değeri (varsayılan: False).</li>
+        <li><strong>labelList:</strong> Etiketler için sözlük.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>Sağlanan girdi metnini okur, belirtilen çeviri modeli kullanarak işler ve çevrilen metni bir dosyaya çıkartır veya doğrudan döndürür.</p>
+</div>
+
+<div class="box">
+    <h2>TranslateToEnglish</h2>
+    <p>Türkçe metni belirtilen bir model kullanarak İngilizceye çevirir. `TranslateToTurkish` yöntemine benzer şekilde, hem doğrudan metin girişi hem de dosya girişi destekler ve `.aby` formatındaki modellerle çalışır.</p>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>modelName:</strong> Model tanımlayıcısı veya yolu (varsayılan: "Helsinki-NLP/opus-mt-tr-en").</li>
+        <li><strong>text:</strong> Çevrilecek metin.</li>
+        <li><strong>outputFile:</strong> Çevrilen metnin yazılacağı dosya.</li>
+        <li><strong>inputFile:</strong> Metnin okunacağı dosya.</li>
+        <li><strong>labelListStatus:</strong> Etiket listesi kullanılıp kullanılmayacağını belirten boolean değeri (varsayılan: True).</li>
+        <li><strong>labelList:</strong> Etiketler için sözlük.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>Sağlanan metni İngilizce çeviri modeli kullanarak işler ve sonucu bir dosyaya çıkartır veya doğrudan döndürür.</p>
+</div>
+
+<div class="box">
+    <h2>ImageToText</h2>
+    <p>Bir görüntünün metin tanımını oluşturur ve tanımı Türkçeye çevirir. Açıklama oluşturmak için BLIP görüntü başlıklandırma modelini kullanır.</p>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>img_path:</strong> Görüntü dosyasının yolu.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>Görüntüyü yükler, önceden eğitilmiş bir görüntü başlıklandırma modeli kullanarak tanımlayıcı bir açıklama oluşturur ve açıklamayı İngilizce'den Türkçe'ye çevirir.</p>
+</div>
+
+<div class="box">
+    <h2>NERAnalysis</h2>
+    <p>Belirtilen metin üzerinde adlandırılmış varlık tanıma (NER) işlemi yapar. Hem doğrudan metin girişi hem de dosya girişi desteklenir, `.aby` formatındaki modellerle çalışır.</p>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>modelName:</strong> NER model tanımlayıcısı veya yolu (varsayılan: "Model/TurkishNERModel.aby").</li>
+        <li><strong>text:</strong> Analiz edilecek metin.</li>
+        <li><strong>outputFile:</strong> NER sonuçlarının yazılacağı dosya.</li>
+        <li><strong>inputFile:</strong> Metnin okunacağı dosya.</li>
+        <li><strong>labelListStatus:</strong> Etiket listesi kullanılıp kullanılmayacağını belirten boolean değeri (varsayılan: True).</li>
+        <li><strong>labelList:</strong> Etiketler için sözlük.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>Metindeki adlandırılmış varlıkları çıkarır, varlık etiketlerini sağlanan veya varsayılan etiket listesi ile eşler ve sonuçları bir dosyaya çıkartır veya doğrudan döndürür.</p>
+</div>
+
+<div class="box">
+    <h2>EntityBasedSentimentAnalysis</h2>
+    <p>Metinden çıkarılan adlandırılmış varlıkların duygusunu ayrı NER ve duygu analizi modelleri kullanarak analiz eder. Hem doğrudan metin girişi hem de dosya girişi desteklenir ve `.aby` formatındaki modellerle çalışır.</p>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>nerModelName:</strong> NER model tanımlayıcısı veya yolu (varsayılan: 'Model/nerModel').</li>
+        <li><strong>sentimentModelName:</strong> Duygu analizi model tanımlayıcısı veya yolu (varsayılan: 'Model/emotionModel').</li>
+        <li><strong>text:</strong> Analiz edilecek metin.</li>
+        <li><strong>inputFile:</strong> Metnin okunacağı dosya.</li>
+        <li><strong>outputFile:</strong> Duygu sonuçlarının yazılacağı dosya.</li>
+        <li><strong>labelListStatus:</strong> Etiket listesi kullanılıp kullanılmayacağını belirten boolean değeri (varsayılan: True).</li>
+        <li><strong>labelList:</strong> Etiketler için sözlük.</li>
+        <li><strong>sentimentLabelList:</strong> Duygu indekslerini etiketlere eşleyen sözlük.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>Metinden varlıkları çıkarır, her varlığın duygusunu analiz eder ve sonuçları bir dosyaya çıkartır veya doğrudan döndürür.</p>
+</div>
+{% endblock %}

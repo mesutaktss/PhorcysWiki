@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="box">
+        <h1>Abyss</h1>
+        <h2>Genel Bakış</h2>
+        <p>`Abyss`, model dosyalarını özel bir ikili format (.aby) içine sıkıştıran ve çıkaran bir Python sınıfıdır. Sıralama sınıflandırması ve Adlandırılmış Varlık Tanıma (NER) görevleri için modelleri ve tokenizasyonları kaydetme ve yükleme destekler.</p>
+    </div>
+
+    <div class="box">
+        <h2>Özellikler</h2>
+        <ul>
+            <li><strong>Sıkıştırma:</strong> Model dosyalarını içeren klasörleri .aby dosya formatına sıkıştırır.</li>
+            <li><strong>Çıkarma:</strong> .aby dosyasının içeriğini belirtilen bir dizine çıkarır.</li>
+            <li><strong>Model Yükleme:</strong> Çıkarılmış bir .aby dosyasından bir sıralama sınıflandırma modeli veya NER boru hattı yükler.</li>
+            <li><strong>Geçici Klasör Yönetimi:</strong> Model çıkarımı ve sıkıştırma için geçici klasörleri yönetir.</li>
+        </ul>
+    </div>
+
+    <div class="box">
+        <h2>Kullanım</h2>
+        <h3>Klasörü Sıkıştır</h3>
+        <pre class="code">
+<code>Abyss.compressFolder(
+    folder_path, 
+    aby_path
+)
+</code></pre>
+        <p>Bir klasörü .aby dosyasına sıkıştırır.</p>
+
+        <h3>.aby Dosyasını Çıkar</h3>
+        <pre class="code">
+<code>Abyss.extractAby(
+    aby_path, 
+    extract_to=None
+)
+</code></pre>
+        <p>Bir .aby dosyasını belirtilen dizine çıkarır veya .aby dosyasıyla aynı adı taşıyan bir dizin oluşturur.</p>
+
+        <h3>Model için Çıkar</h3>
+        <pre class="code">
+<code>Abyss.extractForModel(
+    aby_path
+)
+</code></pre>
+        <p>Bir .aby dosyasından bir model ve tokenizer çıkarır ve sıralama sınıflandırma görevleri için geri döner.</p>
+
+        <h3>NER Modeli için Çıkar</h3>
+        <pre class="code">
+<code>Abyss.extractForNerModel(
+    aby_path
+)
+</code></pre>
+        <p>Bir .aby dosyasından bir NER boru hattı çıkarır ve Adlandırılmış Varlık Tanıma görevleri için geri döner.</p>
+
+        <h3>Modeli Sıkıştır</h3>
+        <pre class="code">
+<code>Abyss.modelCompress(
+    model_name_or_path, 
+    aby_path
+)
+</code></pre>
+        <p>Belirtilen yoldan bir model ve tokenizer'ı .aby dosyasına sıkıştırır.</p>
+
+        <h3>Geçici Dosyaları Kaldır</h3>
+        <pre class="code">
+<code>Abyss.removeTemp(
+    path
+)
+</code></pre>
+        <p>Belirtilen geçici dizini kaldırır.</p>
+    </div>
+{% endblock %}

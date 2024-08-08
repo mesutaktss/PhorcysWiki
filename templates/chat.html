@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat UI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="container">
+            <div class="message-container" id="messageContainer"></div>
+            <div class="req">
+                <textarea id="messageInput" placeholder="Bir şeyler yazın..."></textarea>
+                <button onclick="sendMessage()">></button>
+            </div>
+        </div>
+    </div>
+    <script>
+        function appendMessage(content, sender) {
+            const messageContainer = document.getElementById('messageContainer');
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageElement.textContent = content;
+            messageContainer.appendChild(messageElement);
+            messageContainer.scrollTop = messageContainer.scrollHeight;  // Scroll to bottom
+        }
+
+        async function sendMessage() {
+            const messageInput = document.getElementById('messageInput');
+            const userMessage = messageInput.value.trim();
+            if (!userMessage) return;
+
+            appendMessage(userMessage, 'user');
+            messageInput.value = '';
+
+            try {
+                const response = await fetch('/Chat-api', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: userMessage })
+                });
+                const data = await response.json();
+                appendMessage(data.response, 'bot');
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>

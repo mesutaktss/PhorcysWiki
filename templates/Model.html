@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>ModelGen</h1>
+<h2 id="overview">Genel Bakış</h2>
+<p>`ModelGen`, metin sınıflandırma modelleri oluşturmak ve eğitmek için kullanılan bir Python sınıfıdır. Veri işleme, model eğitimi ve değerlendirmeyi verimli bir şekilde gerçekleştirir.</p>
+
+<div class="box">
+    <h2 id="features">Özellikler</h2>
+    <ul>
+        <li><strong>Veri İşleme:</strong> CSV dosyasından veri okur, etiketleri sayısal değerlere dönüştürür ve veri setini eğitim, doğrulama ve test setlerine böler.</li>
+        <li><strong>Model ve Tokenizer:</strong> Metin verilerini işlemek için önceden eğitilmiş modeller ve tokenizer'lar kullanır.</li>
+        <li><strong>Özel Veri Seti ve DataLoader:</strong> Eğitim sırasında verileri yönetmek için bir veri seti sınıfı ve veri yükleyiciler uygular.</li>
+        <li><strong>Eğitim ve Değerlendirme:</strong> Belirtilen epoch sayısı boyunca modeli eğitir, eğitim ve doğrulama kayıplarını hesaplar ve modeli test setinde değerlendirir.</li>
+        <li><strong>Sonuçları Kaydetme ve Görselleştirme:</strong> Değerlendirme sonuçlarını, eğitim ilerlemesini kaydeder ve görselleştirmeler oluşturur.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2 id="usage">Kullanım</h2>
+    <pre class="code">
+<code>ModelGen.generateClassificationModel(
+dataPath, 
+modelName, 
+labelColumn, 
+textColumn, 
+saveDir="generatedModel", 
+batchSize=12, 
+maxLength=60, 
+numEpochs=3, 
+learningRate=1e-5
+)
+</code></pre>
+    <h3>Parametreler</h3>
+    <ul>
+        <li><strong>dataPath:</strong> CSV dosyasının yolu.</li>
+        <li><strong>modelName:</strong> Kullanılacak önceden eğitilmiş modelin adı (örneğin, "bert-base-uncased").</li>
+        <li><strong>labelColumn:</strong> Etiketleri içeren sütun adı.</li>
+        <li><strong>textColumn:</strong> Metin verilerini içeren sütun adı.</li>
+        <li><strong>saveDir:</strong> Eğitilen modelin ve tokenizer'ın kaydedileceği dizin.</li>
+        <li><strong>batchSize:</strong> Eğitim sırasında kullanılacak batch boyutu.</li>
+        <li><strong>maxLength:</strong> Tokenizer için maksimum token uzunluğu.</li>
+        <li><strong>numEpochs:</strong> Modeli eğitmek için epoch sayısı.</li>
+        <li><strong>learningRate:</strong> Eğitim için öğrenme oranı.</li>
+    </ul>
+    <h3>Fonksiyonellik</h3>
+    <p>CSV dosyasını işler, verileri eğitim, doğrulama ve test setlerine böler. Önceden eğitilmiş bir model ve tokenizer yükler. Modeli eğitir ve doğrulama ve test setlerinde değerlendirir. Değerlendirme sonuçlarını ve eğitim ilerlemesini dosyalara kaydeder. Eğitim ve doğrulama ilerlemesini gösteren grafikler oluşturur ve kaydeder.</p>
+</div>
+
+<div class="box">
+    <h2 id="results-saved">Kaydedilen Sonuçlar</h2>
+    <ul>
+        <li><strong>badLines.txt:</strong> CSV dosyasındaki sorunlu satırları içerir.</li>
+        <li><strong>labelMapping.txt:</strong> Etiketleri karşılık gelen indekslere eşler.</li>
+        <li><strong>evaluationResults.txt:</strong> Test sonuçlarını, sınıflandırma raporunu ve karışıklık matrisini içerir.</li>
+        <li><strong>training_progress.png:</strong> Eğitim ve doğrulama kayıplarını ve doğrulama doğruluğunu gösteren grafikler.</li>
+    </ul>
+</div>
+
+<div class="box">
+    <h2 id="example-usage">Örnek Kullanım</h2>
+    <pre class="code">
+<code>ModelGen.generateClassificationModel(
+"data.csv",
+"bert-base-uncased",
+"label",
+"text",
+saveDir="my_model",
+batchSize=16,
+maxLength=128,
+numEpochs=4,
+learningRate=2e-5
+)
+</code></pre>
+</div>
+{% endblock %}
